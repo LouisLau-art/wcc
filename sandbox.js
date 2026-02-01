@@ -2,13 +2,14 @@ import fs from 'node:fs/promises';
 import { renderFromHTML } from './src/wcc.js';
 
 const clientSideComponents = [
-  'card.js',
-  'card.jsx',
-  'counter.jsx',
-  'counter-dsd.jsx',
-  'greeting.ts',
-  'counter.tsx',
-  'counter-dsd.tsx',
+  // 'card.js',
+  // 'card.jsx',
+  // 'counter.jsx',
+  // 'counter-dsd.jsx',
+  // 'greeting.ts',
+  // 'counter.tsx',
+  // 'counter-dsd.tsx',
+  'signal-counter.jsx',
 ];
 
 async function init() {
@@ -63,6 +64,11 @@ async function init() {
   }
 
   await fs.mkdir(distRoot, { recursive: true });
+  await fs.cp(
+    './node_modules/signal-polyfill/dist/',
+    new URL('./node_modules/signal-polyfill/dist/', distRoot),
+    { recursive: true },
+  );
   await fs.writeFile(
     new URL('./index.html', distRoot),
     html.replace(
